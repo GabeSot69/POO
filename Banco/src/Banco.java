@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -35,11 +36,21 @@ public class Banco {
 	
 	void encerrarConta(Cliente cliente) {
 		cliente = null;
+		System.out.println("Conta encerrada com sucesso");
 	}
 	
 	void realizarPagamento(Cliente cliente, Terceiro terceiro, double valor) {
 		cliente.conta.saldo += valor;
-		
+		System.out.println("Pagamento");
+		System.out.println("Valor: R$" + valor);
+		System.out.println("De: " + terceiro.nome);
+		System.out.println("CPF: " + terceiro.CPF);
+		System.out.println("Banco: " + terceiro.banco.nome);
+		System.out.println();
+		System.out.println("Para: " + cliente.nome);
+		System.out.println("CPF: " + cliente.cpf);
+		System.out.println("Banco: " + nome);
+		System.out.println();
 	}
 	
 	void realizarTransferencia(Cliente clienteEnvio, Cliente clienteRecebimento, double valor) {
@@ -50,14 +61,30 @@ public class Banco {
 		transferencia.valor = valor;
 		transferencia.clienteEnvio.conta.saldo -= transferencia.valor;
 		transferencia.clienteRecebimento.conta.saldo += transferencia.valor;
+		System.out.println("Transferência");
+		SimpleDateFormat dataT = new SimpleDateFormat("dd/MM/AAAA");
+		System.out.println("Data: " + dataT.format(transferencia.data));
+		System.out.println("Valor: R$" + valor);
+		System.out.println("De: " + clienteEnvio.nome);
+		System.out.println("CPF: " + clienteEnvio.cpf);
+		System.out.println("Conta: " + clienteEnvio.conta.numero);
+		System.out.println("Agencia: " + clienteEnvio.conta.agencia.nome);
+		System.out.println();
+		System.out.println("Para: " + clienteRecebimento.nome);
+		System.out.println("CPF: " + clienteRecebimento.cpf);
+		System.out.println("Conta: " + clienteRecebimento.conta.numero);
+		System.out.println("Agencia: " + clienteRecebimento.conta.agencia.nome);
+		System.out.println();
 		
 	}
 	
 	void realizarSaque(Cliente cliente, double valor) {
 		cliente.conta.saldo -= valor;
+		System.out.println("R$" + valor + " sacados com sucesso");
 	}
 	
 	void realizarDeposito(Cliente cliente, double valor) {
 		cliente.conta.saldo += valor;
+		System.out.println("R$" + valor + " depositados com sucesso");
 	}
 }
